@@ -20,7 +20,7 @@ public class ControlIngreso {
 
     private Time horaSalida;
 
-    /*@ManyToOne
+    @ManyToOne
     @JoinColumn(name = "id_usuario")
-    private Usuario usuario;*/
+    private Usuario usuario;
 }

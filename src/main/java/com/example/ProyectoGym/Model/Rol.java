@@ -15,6 +15,6 @@ public class Rol {
 
     private String tipoRol;
 
-    /*@OneToOne(mappedBy = "rol")
-    private List<Usuario> usuario;*/
+    @OneToOne(mappedBy = "rol")
+    private Usuario usuario;
 }
