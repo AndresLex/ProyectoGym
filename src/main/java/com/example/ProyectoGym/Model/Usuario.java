@@ -24,13 +24,9 @@ public class Usuario {
     @JoinColumn(name = "id_membresia")
     private Membresia membresia;
 
-    /*@OneToMany
-    @JoinColumn(name = "id_pago")
-    private Pago pago;*/
-
-    @OneToOne
+    /*    @OneToOne
     @JoinColumn(name = "id_rol")
-    private Rol rol;
+    private Rol rol;*/
 
     private boolean estado;
 }

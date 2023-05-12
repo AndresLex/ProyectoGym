@@ -20,9 +20,10 @@ public class Pago {
     private int periodoTiempo;
 
     @ManyToOne
-    @JoinColumn(name = "id_membresia")
-    private Membresia membresia;
+    private List<Membresia> membresia;
+    /*@JoinColumn(name = "id_membresia")*/
 
-    @ManyToOne(mappedBy = "pago")
-    private List<Pago> Pago;
+
+    /*@ManyToOne(mappedBy = "pago")
+    private List<Pago> Pago;*/
 }

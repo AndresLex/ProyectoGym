@@ -15,8 +15,9 @@ public class Membresia {
 
     private String tipo;
 
-    @OneToMany(mappedBy = "membresia")
-    private List<Pago> pago;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_pago")
+    private Pago pago;
 
     private double valor;
 }
