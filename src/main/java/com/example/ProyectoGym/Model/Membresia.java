@@ -22,8 +22,11 @@ public class Membresia {
     @JoinColumn(name = "id_pago")
     private Pago pago;*/
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    /*@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id_membresia")
-    private List<Pago> pago;
+    private List<Pago> pago;*/
+
+    @OneToOne(mappedBy = "membresia")
+    private Usuario usuario;
     private double valor;
 }

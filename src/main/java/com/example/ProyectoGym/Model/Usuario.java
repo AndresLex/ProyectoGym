@@ -31,6 +31,10 @@ public class Usuario {
     @JoinColumn(name = "id_rol")
     private Rol rol;
 
+    @OneToOne
+    @JoinColumn(name = "id_membresia")
+    private Membresia membresia;
+
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<ControlIngreso> controlIngreso;
 }
