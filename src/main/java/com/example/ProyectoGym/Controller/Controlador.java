@@ -24,8 +24,14 @@ public class Controlador {
     @GetMapping("/login")
     public String login(Model model){
         model.addAttribute("title", "Inicio de sesion");
-
         return "login";
+    }
+
+    @GetMapping("/inicio")
+    public String inicio(Model model){
+        model.addAttribute("title", "Dashboard Administrador");
+        model.addAttribute("datosUsuario", servUsu.listar());
+        return "index";
     }
 
 }

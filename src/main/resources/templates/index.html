@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="title">Title</title>
+    <link rel="stylesheet" href="styleIndex.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                    <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <span class="fs-5 d-none d-sm-inline">Menu</span>
+                    </a>
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                        <li class="nav-item">
+                            <a th:href="@{/inicio}" class="nav-link align-middle px-0">
+                                <img src="https://img.icons8.com/pulsar-line/26/null/home.png"/><span class="ms-1 d-none d-sm-inline">Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/acciones}" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <img src="https://img.icons8.com/external-outline-lafs/26/null/external-actions-cloud-storage-outline-lafs.png"/>
+                                <span class="ms-1 d-none d-sm-inline">Acciones</span>
+                            </a>
+                            <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a th:href="@{/regisCli}" class="nav-link px-0">
+                                        <img src="https://img.icons8.com/pastel-glyph/26/null/add-male-user.png"/>
+                                        <span class="d-none d-sm-inline">Nuevo Cliente</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/regisPed}" class="nav-link px-0">
+                                        <img src="https://img.icons8.com/material-outlined/26/null/shopping-basket-add.png"/>
+                                        <span class="d-none d-sm-inline">Registrar Pedido</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col py-3">
+                <header class="header-box">
+                    <h2>USUARIOS REGISTRADOS</h2>
+                </header>
+                <section class="contenido">
+                    <div class="contentTab">
+                        <button type="submit">+ Añadir Usuario</button>
+                        <table class="table table-dark table-hover">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Cedula</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Edad</th>
+                                <th>Sexo</th>
+                                <th>Celular</th>
+                                <th>Correo</th>
+                                <th>Estatura</th>
+                                <th>Peso</th>
+                                <th>Membresia</th>
+                                <th>Estado</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="cliente: ${datosUsuario}" th:object="${cliente}">
+                                <td th:text="*{id_usuario}"></td>
+                                <td th:text="*{cedula}"></td>
+                                <td th:text="*{nombre}"></td>
+                                <td th:text="*{apellido}"></td>
+                                <td th:text="*{edad}"></td>
+                                <td th:text="*{sexo}"></td>
+                                <td th:text="*{celular}"></td>
+                                <td th:text="*{correo}"></td>
+                                <td th:text="*{estatura}"></td>
+                                <td th:text="*{peso}"></td>
+                                <td th:text="*{membresia.tipo}"></td>
+                                <td th:text="*{estado}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
