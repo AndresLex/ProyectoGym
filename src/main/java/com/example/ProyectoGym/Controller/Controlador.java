@@ -24,7 +24,7 @@ public class Controlador {
     @GetMapping("/login")
     public String login(Model model){
         model.addAttribute("title", "Inicio de sesion");
-        model.addAttribute("txt", "Login");
+
         return "login";
     }
 
