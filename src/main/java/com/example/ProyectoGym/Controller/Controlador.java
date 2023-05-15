@@ -34,4 +34,10 @@ public class Controlador {
         return "index";
     }
 
+    @GetMapping("/acciones")
+    public String acciones(Model model){
+        model.addAttribute("title", "Acciones");
+        model.addAttribute("datosUsuario", servUsu.listar());
+        return "acciones";
+    }
 }

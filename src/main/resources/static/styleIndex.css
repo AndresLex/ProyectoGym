@@ -38,6 +38,7 @@ header h1 {
 .sidebar a {
 	display: block;
 	padding: 10px;
+	margin-top: 15px;
 	color: #fff;
 	text-decoration: none;
 	transition: 0.5s;
@@ -46,7 +47,7 @@ header h1 {
 .sidebar a:hover {
 	background: #fff;
 	color: #333;
-    border-radius: 15px;
+    border-radius: 22px;
 }
 
 .content {
