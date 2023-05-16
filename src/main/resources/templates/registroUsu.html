@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title th:text="${title}">Title</title>
     <link rel="stylesheet" href="styleIndex.css">
+    <link rel="stylesheet" href="styleRegistro.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 </head>
 <body>
@@ -21,7 +22,107 @@
     <a href="#"><img  src="https://img.icons8.com/ios/26/cash-in-hand.png" alt="cash-in-hand"/>   Pago</a>
 </nav>
 <section class="content">
-    <!-- Contenido -->
+    <main class="contenido">
+        <form>
+            <!--<input type="hidden" th:field="*{id_usuario}">-->
+            <h4>Datos Personales</h4>
+            <label for="name">Nombres
+                <input type="text" name="name" id="name" placeholder="Digite el Nombre" required>
+            </label>
+            <label for="ape">Apellidos
+                <input type="text" name="ape" id="ape" placeholder="Digite los Apellidos" required>
+            </label>
+            <br>
+            <label for="ide">Identificacion
+                <input type="text" name="ide" id="ide" placeholder="Digite la Identificacion" required>
+            </label>
+            <label for="sex">Género
+                <select name="sex" id="sex" required>
+                    <option value="M">Masculino</option>
+                    <option value="F">Femenino</option>
+                </select>
+            </label>
+            <br>
+            <label for="age">Edad:
+                <input type="number" id="age" name="age" placeholder="Digite la Edad" required>
+            </label>
+            <label for="phone">Teléfono:
+                <input type="tel" id="phone" name="phone" placeholder="Digite el numero de telefono" required>
+            </label>
+            <br>
+            <label for="email">Email:
+                <input type="email" id="email" name="email" placeholder="Digite el correo" required>
+            </label>
+            <h4>Perfil de la Cuenta</h4>
+            <br>
+            <h4>Medidas Corporales</h4>
+            
+            <br>
+            <button type="submit">Registrar Usuario</button>
+        </form>
+
+        <!--<form>
+            <div class="grid-container">
+              <div class="datos-personales">
+                <h2>Datos personales</h2>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+          
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" required>
+          
+                <label for="correo">Correo electrónico:</label>
+                <input type="email" id="correo" name="correo" required>
+          
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" id="telefono" name="telefono" required>
+          
+                <label for="fecha-nacimiento">Fecha de nacimiento:</label>
+                <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" required>
+          
+                <label for="genero">Género:</label>
+                <select id="genero" name="genero">
+                  <option value="masculino">Masculino</option>
+                  <option value="femenino">Femenino</option>
+                  <option value="otro">Otro</option>
+                </select>
+          
+                <label for="pais">País:</label>
+                <input type="text" id="pais" name="pais" required>
+              </div>
+          
+              <div class="medidas-corporales">
+                <h2>Medidas corporales</h2>
+                <label for="altura">Altura:</label>
+                <input type="number" id="altura" name="altura" required>
+          
+                <label for="peso">Peso:</label>
+                <input type="number" id="peso" name="peso" required>
+              </div>
+          
+              <div class="perfil-cuenta">
+                <h2>Perfil de cuenta</h2>
+                <label for="nombre-usuario">Nombre de usuario:</label>
+                <input type="text" id="nombre-usuario" name="nombre-usuario" required>
+          
+                <label for="contrasena">Contraseña:</label>
+                <input type="password" id="contrasena" name="contrasena" required>
+              </div>
+            </div>
+
+            <div class="Otro-perfil-cuenta">
+                <h2>Otro Perfil</h2>
+                <label for="nombre-usuario">Nombre de usuario:</label>
+                <input type="text" id="nombre-usuario" name="nombre-usuario" required>
+          
+                <label for="contrasena">Contraseña:</label>
+                <input type="password" id="contrasena" name="contrasena" required>
+              </div>
+            </div>
+            
+            <button type="submit">Enviar</button>
+          </form>-->
+    </main>
 </section>
 </body>
 </html>

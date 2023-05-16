@@ -40,4 +40,11 @@ public class Controlador {
         model.addAttribute("datosUsuario", servUsu.listar());
         return "acciones";
     }
+
+    @GetMapping("/registroUsu")
+    public String registroUsu(Model model){
+        model.addAttribute("title", "Registro de Usuario");
+
+        return "registroUsu";
+    }
 }
