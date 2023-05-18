@@ -23,9 +23,10 @@
 </nav>
 <section class="content">
     <main class="contenido">
-        <form>
-            <!--<input type="hidden" th:field="*{id_usuario}">-->
+        <form th:action="@{/guardarUsu}" method="post" th:object="${usuario}">
+            <input type="hidden" th:field="*{id_usuario}">
             <h4>Datos Personales</h4>
+            <br>
             <label for="name">Nombres
                 <input type="text" name="name" id="name" placeholder="Digite el Nombre" required>
             </label>
@@ -44,7 +45,7 @@
             </label>
             <br>
             <label for="age">Edad:
-                <input type="number" id="age" name="age" placeholder="Digite la Edad" required>
+                <input type="number" id="age" name="age" placeholder="Digite la Edad" required min="1">
             </label>
             <label for="phone">Teléfono:
                 <input type="tel" id="phone" name="phone" placeholder="Digite el numero de telefono" required>
@@ -56,7 +57,27 @@
             <h4>Perfil de la Cuenta</h4>
             <br>
             <h4>Medidas Corporales</h4>
+            <br>
+            <label for="altura">Estatura:
+                <input type="number" id="altura" name="altura" placeholder="Digite la estatura" required>
+            </label>
             
+            <label for="membresia">Membresia
+                <select name="membresia" id="membresia" required>
+                    <option value="Publica">Publica</option>
+                    <option value="Estudiante">Estudiante</option>
+                </select>
+            </label>
+            <br>
+            <label for="peso">Peso:
+                <input type="number" id="peso" name="peso" placeholder="Digite el peso" required>
+            </label>
+            <label for="rol">Tipo de rol
+                <select name="rol" id="rol" required>
+                    <option value="user">Usuario</option>
+                    <option value="admin">Administrador</option>
+                </select>
+            </label>
             <br>
             <button type="submit">Registrar Usuario</button>
         </form>

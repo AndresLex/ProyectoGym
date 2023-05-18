@@ -50,6 +50,10 @@ button[type="submit"]:active {
     background-color: #45a049;
 }
 
+h4{
+    display: inline-block;
+}
+
 
 
 /*form {

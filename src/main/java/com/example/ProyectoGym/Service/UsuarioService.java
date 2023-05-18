@@ -1,6 +1,7 @@
 package com.example.ProyectoGym.Service;
 
 import com.example.ProyectoGym.InterfaceService.IUsuarioService;
+import com.example.ProyectoGym.Model.Rol;
 import com.example.ProyectoGym.Model.Usuario;
 import com.example.ProyectoGym.Repository.IUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,11 @@ public class UsuarioService implements IUsuarioService {
     }
 
     @Override
+    public Usuario buscarCedula(String cedula) {
+        return data.findByCedula(cedula);
+    }
+
+    @Override
     public Optional<Usuario> editar(int id) {
         return data.findById(id);
     }
@@ -33,4 +39,9 @@ public class UsuarioService implements IUsuarioService {
     public void eliminar(int id) {
         data.deleteById(id);
     }
+
+    /*@Override
+    public Rol listarPorRol(int id) {
+        return data.buscarPorRol(id);
+    }*/
 }
