@@ -54,7 +54,14 @@ public class Controlador {
         return "registroUsu";
     }
 
-    @GetMapping("/controlIngreso")
+    @GetMapping("/registroPago")
+    public String registroPago(Model model){
+        model.addAttribute("title", "Registro de Pago ");
+
+        return "registroPago";
+    }
+
+    @GetMapping("/controlAcceso")
     public String controlIngreso(Model model){
         model.addAttribute("title", "Contro de Ingreso y Salida");
 
