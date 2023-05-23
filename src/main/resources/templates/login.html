@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title th:text="${title}">Title</title>
-    <link rel="stylesheet" href="styleLogin.css">
+	<meta charset="UTF-8">
+	<title th:text="${title}">Title</title>
+	<link rel="stylesheet" href="styleLogin.css">
 </head>
 <body>
-  <div class="login-box">
-		<h2>Inicio de sesión</h2>
-		<form th:action="@{/validarUsu}" method="post">
-			<div class="user-box">
-				<input type="text" name="cedula" id="cedula" required>
-				<!--<select class="form-control" required>
-					<option th:each="user: ${datosUsu}" th:value="${user.id_usuario}" th:text="${user.nombre}" selected></option>
-				</select>-->
-				<label>Cédula</label>
-			</div>
-			<button type="submit">Ingresar</button>
-		</form>
-  </div>
+<div class="login-box">
+	<h2>Inicio de sesión</h2>
+	<form action="/validarUsu" method="post">
+		<div class="user-box">
+			<input th:value="${cedula}" type="text" name="cedula" required>
+			<label>Cédula</label>
+			<p th:text="${mensaje}" style="color: red;"></p>
+		</div>
+		<button type="submit">Ingresar</button>
+	</form>
+	<!--
+            <form action="/validarUsu" method="post" th:if="${usuario == null}">
+                <div class="user-box">
+                    <input th:value="${cedula}" type="text" name="cedula" required>
+                    <p style="color: red">No se encontró ningún usuario con la cédula ingresada.</p>
+                    <p style="color: blue">Ingrese otra cedula.</p>
+                    <label>Cédula</label>
+                </div>
+                <button type="submit">Ingresar</button>
+            </form>
+            -->
+
+</div>
 </body>
 </html>

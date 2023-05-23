@@ -81,20 +81,19 @@ body {
     border-radius: 4px;
     cursor: pointer;
   }
+
   button.bingreso{
     background-color: #72bb53;
-
-
-
   }
+
   button.bsalida{
     background-color: #ff3823;
-
-   ;
-
   }
-
 
   button:hover {
     background-color: black;
   }
+
+label[for="usuario"]{
+  width: 100%;
+}

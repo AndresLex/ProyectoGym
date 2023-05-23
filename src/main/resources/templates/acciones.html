@@ -22,7 +22,7 @@
 </nav>
 <section class="content">
     <div class="contentTab">
-        <button type="submit">+ Añadir Usuario</button>
+        <a th:href="@{/registroUsu}" class="btnP">+ Añadir Usuario</a>
         <table class="table table-hover">
             <thead>
             <tr>
@@ -34,16 +34,16 @@
             </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr th:each="cliente: ${datosUsuario}" th:object="${cliente}">
-                    <td th:text="*{cedula}"></td>
-                    <td th:text="*{nombre}"></td>
-                    <td th:text="*{apellido}"></td>
-                    <td>
-                        <a class="btn btn-warning" th:href="@{/editarUsu/} + *{id_usuario}">Editar</a>
-                        <a class="btn btn-danger" th:href="@{/eliminarUsu/} + *{id_usuario}">Eliminar</a>
-                    </td>
-                    <td th:text="*{id_usuario}"></td>
-                </tr>
+            <tr th:each="cliente: ${datosUsuario}" th:object="${cliente}">
+                <td th:text="*{cedula}"></td>
+                <td th:text="*{nombre}"></td>
+                <td th:text="*{apellido}"></td>
+                <td>
+                    <a class="btn btn-warning" th:href="@{/editarUsu/} + *{id_usuario}">Editar</a>
+                    <a class="btn btn-danger" th:href="@{/eliminarUsu/} + *{id_usuario}">Eliminar</a>
+                </td>
+                <td th:text="*{id_usuario}"></td>
+            </tr>
             </tbody>
         </table>
     </div>

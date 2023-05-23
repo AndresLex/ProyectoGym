@@ -24,7 +24,7 @@ public class Usuario {
     private String cedula;
     private boolean estado;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Pago> pago;
 
     @OneToOne

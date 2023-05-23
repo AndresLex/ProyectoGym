@@ -9,7 +9,7 @@
 </head>
 <body>
 <header>
-    <h1>Registro Nuevo Usuario</h1>
+    <h1 th:text="${head}">Registro Nuevo Usuario</h1>
 </header>
 <nav class="sidebar">
     <img width="150"  src="https://www.sopo-cundinamarca.gov.co/info/sopo_se/media/bloque29.png" alt="fondoGym">
@@ -25,59 +25,59 @@
     <main class="contenido">
         <form th:action="@{/guardarUsu}" method="post" th:object="${usuario}">
             <input type="hidden" th:field="*{id_usuario}">
+            <input type="hidden" th:field="*{estado}" value="false">
             <h4>Datos Personales</h4>
             <br>
             <label for="name">Nombres
-                <input type="text" name="name" id="name" placeholder="Digite el Nombre" required>
+                <input th:field="*{nombre}" type="text" name="name" id="name" placeholder="Digite el Nombre" required>
             </label>
             <label for="ape">Apellidos
-                <input type="text" name="ape" id="ape" placeholder="Digite los Apellidos" required>
+                <input th:field="*{apellido}" type="text" name="ape" id="ape" placeholder="Digite los Apellidos" required>
             </label>
             <br>
             <label for="ide">Identificacion
-                <input type="text" name="ide" id="ide" placeholder="Digite la Identificacion" required>
+                <input th:field="*{cedula}" type="text" name="ide" id="ide" placeholder="Digite la Identificacion" required>
             </label>
             <label for="sex">Género
-                <select name="sex" id="sex" required>
-                    <option value="M">Masculino</option>
+                <select th:field="*{sexo}" name="sex" id="sex" required>
+                    <option value="M" selected>Masculino</option>
                     <option value="F">Femenino</option>
                 </select>
             </label>
             <br>
             <label for="age">Edad:
-                <input type="number" id="age" name="age" placeholder="Digite la Edad" required min="1">
+                <input th:field="*{edad}" type="number" id="age" name="age" placeholder="Digite la Edad" required min="1">
             </label>
             <label for="phone">Teléfono:
-                <input type="tel" id="phone" name="phone" placeholder="Digite el numero de telefono" required>
+                <input th:field="*{celular}" type="tel" id="phone" name="phone" placeholder="Digite el numero de telefono" required>
             </label>
             <br>
             <label for="email">Email:
-                <input type="email" id="email" name="email" placeholder="Digite el correo" required>
+                <input th:field="*{correo}" type="email" id="email" name="email" placeholder="Digite el correo" required>
             </label>
             <h4>Perfil de la Cuenta</h4>
             <br>
             <h4>Medidas Corporales</h4>
             <br>
             <label for="altura">Estatura:
-                <input type="number" id="altura" name="altura" placeholder="Digite la estatura" required>
+                <input th:field="*{estatura}" step="any" type="number" id="altura" name="altura" placeholder="Digite la estatura" required>
             </label>
-            
+
             <label for="membresia">Membresia
-                <select name="membresia" id="membresia" required>
-                    <option value="Publica">Publica</option>
-                    <option value="Estudiante">Estudiante</option>
+                <select th:field="*{membresia.id_membresia}" name="membresia" id="membresia" required>
+                    <option th:each="mem: ${datosMem}" th:value="${mem.id_membresia}" th:text="${mem.tipo}"></option>
                 </select>
             </label>
             <br>
             <label for="peso">Peso:
-                <input type="number" id="peso" name="peso" placeholder="Digite el peso" required>
+                <input th:field="*{peso}" type="number" id="peso" name="peso" placeholder="Digite el peso" required>
             </label>
             <label for="rol">Tipo de rol
-                <select name="rol" id="rol" required>
-                    <option value="user">Usuario</option>
-                    <option value="admin">Administrador</option>
+                <select th:field="*{rol.id_rol}" name="rol" id="rol" required>
+                    <option th:each="rol: ${datosRol}" th:value="${rol.id_rol}" th:text="${rol.tipoRol}"></option>
                 </select>
             </label>
+            <br>
             <br>
             <button type="submit">Registrar Usuario</button>
         </form>

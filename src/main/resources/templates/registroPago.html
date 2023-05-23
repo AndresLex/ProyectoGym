@@ -23,59 +23,85 @@
 </nav>
 <section class="content">
     <main class="contenido">
-        <form >
+        <!--<form th:action="@{/buscarUsu}" method="post" th:object="${usuario}">-->
+        <h4>Busqueda de Usuario</h4>
 
-            <h4>Busqueda de Usuario</h4>
-            <br>
-            <label>Buscar por Cedula <input type="text" name="cedula" id="cedula" placeholder="Digite la cedula" required>
-            </label><button type="submit">Buscar</button>
-            <label for="name">Nombres
-                <input type="text" name="name" id="name" placeholder="Digite el Nombre" required>
+        <form action="/buscarUsuario" method="post">
+            <label>Buscar por Cedula
+                <input th:value="${cedula}" type="text" name="cedula" placeholder="Digite la cedula" required>
             </label>
+            <button type="submit">Buscar</button>
+        </form>
+        <!--
+                <h2>Resultado de la búsqueda</h2>
+                <div th:if="${usuario != null}">
+                    <p>Nombre: <span th:text="${usuario.nombre}"></span></p>
+                    <p>Cédula: <span th:text="${usuario.cedula}"></span></p>
+                </div>
+                <div th:if="${usuario == null}">
+                    <p>No se encontró ningún usuario con la cédula ingresada.</p>
+                </div>
+        -->
 
-            <br>
-            <label >Busqueda por Seleccion de usuario
-                <br><select name="" id=""><option value="">Nombre usuarios</option></select>
-            </label>
-            <label for="ape">Apellidos
-                <input type="text" name="ape" id="ape" placeholder="Digite los Apellidos" required>
-            </label>
-            </label>
-            <br>
+        <label class="mr0">Nombres
+            <input th:if="${usuario != null}" th:value="${usuario.nombre}" type="text" required disabled>
+            <input th:if="${usuario == null}" type="text" placeholder="Nombre del Usuario no encontrado" required disabled>
+        </label>
 
-            <h4>Informacion de Pago</h4>
-            <br>
+        <br>
 
-            <br>
-            <label >Tipo Membresia:
-                <input type="text" placeholder="Tipo Membresia" required>
-            </label>
 
-            <label >Fecha de Inicio
-                <input type="date">
+        <!--<label>Busqueda por Seleccion de usuario
+            <br>
+            <select>
+                <option th:each="usu: ${datosUsu}" th:value="${usu.id_usuario}">
+                    <a th:href="@{buscarPorSelect/} + *{id_usuario}" th:text="${usu.nombre}"></a>
+                </option>
+            </select>
+        </label>-->
+
+        <label class="mr0">Apellidos
+            <input th:if="${usuario != null}" th:value="${usuario.apellido}" type="text" required disabled>
+            <input th:if="${usuario == null}" type="text" placeholder="Apellidos del Usuario no encontrados" required disabled>
+        </label>
+        <br>
+        <!--</form>-->
+
+
+        <h4>Informacion de Pago</h4>
+        <br>
+
+        <br>
+        <label >Tipo Membresia:
+            <input th:if="${usuario != null}" th:value="${usuario.membresia.tipo}" type="text" required disabled>
+            <input th:if="${usuario == null}" type="text" placeholder="Tipo de Membresia" required disabled>
+        </label>
+        <form>
+            <label class="mr0">Fecha de Inicio
+                <input type="date" required>
             </label>
             <br>
             <label >Tiempo de Suscripcion
                 <input type="text" placeholder="Digite el tiempo de pago" required>
             </label>
-            <label >Fecha de Fin
-                <input type="date">
+            <label class="mr0">Fecha de Fin
+                <input type="date" required>
             </label>
 
             <br>
-            <label >Estado  </label>
+            <label >Estado
                 <br>
                 <select name="estado" id="estado">
-                    <option value="Activo">Activo</option>
-                    <option value="Activo">Inactivo</option>
+                    <option value="true">Activo</option>
+                    <option value="false">Inactivo</option>
                 </select>
-                <br>
-                <label for="valor_pago">Valor a Pagar
-                    <input type="text" name="valor_pago" id="valor_pago" placeholder="Precio" required>
-                </label>
-                <br>
-                <br>
-                <button type="submit">Registrar Pago</button>
+            </label>
+            <label for="valor_pago" class="mr0">Valor a Pagar
+                <input type="number" name="valor_pago" id="valor_pago" placeholder="Precio" required>
+            </label>
+            <br>
+            <br>
+            <button type="submit">Registrar Pago</button>
         </form>
 
         <!--<form>
