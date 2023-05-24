@@ -8,6 +8,7 @@ import  org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +26,12 @@ public class Controlador {
     private IMembresiaService servMem;
     @Autowired
     private IControlIngresoService servCont;
+
+    private Usuario userActual;
+    private int periodoTiempo;
+    private LocalDate fechaInicio;
+    private LocalDate fechaFin;
+    private double precioTotal;
 
     @GetMapping("/login")
     public String login(Model model){
@@ -57,37 +64,41 @@ public class Controlador {
         return "registroUsu";
     }
 
+    //Para renderizar el template de pago
     @GetMapping("/registroPago")
     public String registroPago(Model model){
         model.addAttribute("title", "Registro de Pago ");
-
-        //model.addAttribute("usuarios", servUsu.listar());
-        //model.addAttribute("userPago", userPago);
-        return "registroPago";
-    }
-
-    @GetMapping("/buscarPorSelect/{id}")
-    public String buscarPorSelect(@PathVariable("id")int id, Model model){
-        model.addAttribute("usuario", servUsu.editar(id));
-        model.addAttribute("datosUsu", servUsu.listar());
-        return "registroPago";
-    }
-
-    @PostMapping("/buscarUsu")
-    public String buscarUsu(@ModelAttribute Usuario usu, Model model){
-        model.addAttribute("usuario", servUsu.editar(usu.getId_usuario()));
-        model.addAttribute("datosUsu", servUsu.listar());
         return "registroPago";
     }
 
     @PostMapping("/buscarUsuario")
     public String buscarUsuarioPorCedula(@RequestParam("cedula") String cedula, Model model) {
+        model.addAttribute("title", "Registro de Pago ");
         Usuario usuario = servUsu.buscarCedula(cedula);
+        this.userActual = usuario;
         model.addAttribute("usuario", usuario);
         return "registroPago"; // Retorna el nombre de la vista para mostrar el resultado de la búsqueda
     }
 
-
+    @PostMapping("/calcularPrecio")
+    public String calcularPrecio(@RequestParam("valor") double valor, @RequestParam("tiempo") int tiempo, Model model) {
+        model.addAttribute("title", "Registro de Pago ");
+        double valorTotal = valor * tiempo;
+        this.precioTotal = valorTotal;
+        this.periodoTiempo = tiempo;
+        model.addAttribute("usuario", this.userActual);
+        model.addAttribute("valorTotal", valorTotal);
+        // Obtener la fecha actual
+        LocalDate currentDate = LocalDate.now();
+        this.fechaInicio = currentDate;
+        // Fecha Futura
+        LocalDate futureDate = currentDate.plusMonths(tiempo);
+        this.fechaFin = futureDate;
+        model.addAttribute("fechaActual", currentDate);
+        model.addAttribute("fechaFutura", futureDate);
+        this.userActual = null;
+        return "registroPago"; // Retorna el nombre de la vista para mostrar el resultado de la búsqueda
+    }
 
     @GetMapping("/controlAcceso")
     public String controlIngreso(Model model){

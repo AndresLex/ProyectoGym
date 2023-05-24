@@ -23,7 +23,7 @@
 </nav>
 <section class="content">
     <main class="contenido">
-        <!--<form th:action="@{/buscarUsu}" method="post" th:object="${usuario}">-->
+
         <h4>Busqueda de Usuario</h4>
 
         <form action="/buscarUsuario" method="post">
@@ -32,62 +32,56 @@
             </label>
             <button type="submit">Buscar</button>
         </form>
-        <!--
                 <h2>Resultado de la búsqueda</h2>
                 <div th:if="${usuario != null}">
                     <p>Nombre: <span th:text="${usuario.nombre}"></span></p>
-                    <p>Cédula: <span th:text="${usuario.cedula}"></span></p>
+                    <p>Apellido: <span th:text="${usuario.apellido}"></span></p>
+                    <p>Cedula: <span th:text="${usuario.cedula}"></span></p>
                 </div>
                 <div th:if="${usuario == null}">
                     <p>No se encontró ningún usuario con la cédula ingresada.</p>
                 </div>
-        -->
-
+        <!--
         <label class="mr0">Nombres
-            <input th:if="${usuario != null}" th:value="${usuario.nombre}" type="text" required disabled>
+            <input th:if="${usuario != null}" th:value="${usuario.nombre}" name="nombre" type="text" required disabled>
             <input th:if="${usuario == null}" type="text" placeholder="Nombre del Usuario no encontrado" required disabled>
         </label>
-
         <br>
-
-
-        <!--<label>Busqueda por Seleccion de usuario
-            <br>
-            <select>
-                <option th:each="usu: ${datosUsu}" th:value="${usu.id_usuario}">
-                    <a th:href="@{buscarPorSelect/} + *{id_usuario}" th:text="${usu.nombre}"></a>
-                </option>
-            </select>
-        </label>-->
 
         <label class="mr0">Apellidos
             <input th:if="${usuario != null}" th:value="${usuario.apellido}" type="text" required disabled>
             <input th:if="${usuario == null}" type="text" placeholder="Apellidos del Usuario no encontrados" required disabled>
-        </label>
+        </label>-->
         <br>
-        <!--</form>-->
-
-
         <h4>Informacion de Pago</h4>
         <br>
-
         <br>
         <label >Tipo Membresia:
             <input th:if="${usuario != null}" th:value="${usuario.membresia.tipo}" type="text" required disabled>
             <input th:if="${usuario == null}" type="text" placeholder="Tipo de Membresia" required disabled>
         </label>
-        <form>
-            <label class="mr0">Fecha de Inicio
-                <input type="date" required>
+        <br>
+        <form action="/calcularPrecio" method="post">
+            <label >Valor Membresia:
+                <input th:if="${usuario != null}" th:value="${usuario.membresia.valor}" step="any" name="valor" type="number" required>
+                <input th:if="${usuario == null}" type="number" placeholder="Valor de Membresia" required disabled>
             </label>
             <br>
             <label >Tiempo de Suscripcion
-                <input type="text" placeholder="Digite el tiempo de pago" required>
+                <input th:value="${tiempo}" type="number" name="tiempo" placeholder="Digite el tiempo de pago" required max="12" min="1">
             </label>
-            <label class="mr0">Fecha de Fin
-                <input type="date" required>
+            <button type="submit">Calcular precio</button>
+        </form>
+
+        <form action="/">
+            <!--<input type="hidden" th:field="*{usuario.id_usuario}">-->
+            <label class="mr0">Fecha de Inicio
+                <input th:value="${fechaActual}" type="date" required>
             </label>
 
+            <label class="mr0">Fecha de Fin
+                <input th:value="${fechaFutura}" type="date" required>
+            </label>
             <br>
             <label >Estado
                 <br>
@@ -97,74 +91,12 @@
                 </select>
             </label>
             <label for="valor_pago" class="mr0">Valor a Pagar
-                <input type="number" name="valor_pago" id="valor_pago" placeholder="Precio" required>
+                <input th:value="${valorTotal}" type="number" name="valor_pago" id="valor_pago" placeholder="Precio" required disabled>
             </label>
             <br>
             <br>
             <button type="submit">Registrar Pago</button>
         </form>
-
-        <!--<form>
-            <div class="grid-container">
-              <div class="datos-personales">
-                <h2>Datos personales</h2>
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required>
-
-                <label for="apellido">Apellido:</label>
-                <input type="text" id="apellido" name="apellido" required>
-
-                <label for="correo">Correo electrónico:</label>
-                <input type="email" id="correo" name="correo" required>
-
-                <label for="telefono">Teléfono:</label>
-                <input type="tel" id="telefono" name="telefono" required>
-
-                <label for="fecha-nacimiento">Fecha de nacimiento:</label>
-                <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" required>
-
-                <label for="genero">Género:</label>
-                <select id="genero" name="genero">
-                  <option value="masculino">Masculino</option>
-                  <option value="femenino">Femenino</option>
-                  <option value="otro">Otro</option>
-                </select>
-
-                <label for="pais">País:</label>
-                <input type="text" id="pais" name="pais" required>
-              </div>
-
-              <div class="medidas-corporales">
-                <h2>Medidas corporales</h2>
-                <label for="altura">Altura:</label>
-                <input type="number" id="altura" name="altura" required>
-
-                <label for="peso">Peso:</label>
-                <input type="number" id="peso" name="peso" required>
-              </div>
-
-              <div class="perfil-cuenta">
-                <h2>Perfil de cuenta</h2>
-                <label for="nombre-usuario">Nombre de usuario:</label>
-                <input type="text" id="nombre-usuario" name="nombre-usuario" required>
-
-                <label for="contrasena">Contraseña:</label>
-                <input type="password" id="contrasena" name="contrasena" required>
-              </div>
-            </div>
-
-            <div class="Otro-perfil-cuenta">
-                <h2>Otro Perfil</h2>
-                <label for="nombre-usuario">Nombre de usuario:</label>
-                <input type="text" id="nombre-usuario" name="nombre-usuario" required>
-
-                <label for="contrasena">Contraseña:</label>
-                <input type="password" id="contrasena" name="contrasena" required>
-              </div>
-            </div>
-
-            <button type="submit">Enviar</button>
-          </form>-->
     </main>
 </section>
 </body>

@@ -24,7 +24,7 @@ label {
 
 input{
     display: block;
-    width: 15vw;
+    width: 16vw;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -55,8 +55,11 @@ h4{
 }
 
 .mr0{
-  position: absolute;
-  right: 21vw;
+  /*position: absolute;
+  right: 21vw;*/
+    display: flex;
+    align-items: center;
+    justify-content: right;
 }
 
 
