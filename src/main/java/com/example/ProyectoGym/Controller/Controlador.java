@@ -197,24 +197,28 @@ public class Controlador {
             if (id_rol == 111) {
                 return "index";
             } else if (id_rol == 112) {
-                model.addAttribute("usuario", user);
-                this.userActual= user;
-                //Fecha Actual
-                SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-                Date fechaActual = new Date();
-                String fechaFormateada = formatoFecha.format(fechaActual);
-                model.addAttribute("fecha", fechaFormateada);
+                if (user.isEstado() == true) {
+                    model.addAttribute("usuario", user);
+                    this.userActual = user;
+                    //Fecha Actual
+                    /*SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+                    Date fechaActual = new Date();
+                    String fechaFormateada = formatoFecha.format(fechaActual);*/
+                    model.addAttribute("fecha", ObtenerFecha());
 
-                //Hora Actual
+                    //Hora Actual
 
-                SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
-                Date horaActual = new Date();
-                String horaFormateada = formatoHora.format(horaActual);
-                model.addAttribute("hora", horaFormateada);
+                    /*SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
+                    Date horaActual = new Date();
+                    String horaFormateada = formatoHora.format(horaActual);*/
+                    model.addAttribute("hora", ObtenerHora());
 
 
-
-                return "controlAcceso";
+                    return "controlAcceso";
+                }else {
+                    model.addAttribute("mensaje", "El usuario no ha realizado el Pago !!");
+                    return "login";
+                }
             }
         } else {
             model.addAttribute("mensaje", "Cedula no encontrada. Por favor, vuelva a digitarla.");
@@ -243,5 +247,21 @@ public class Controlador {
     public String eliminarUsuario(@PathVariable("id") int id){
         servUsu.eliminar(id);
         return "redirect:/acciones";
+    }
+
+    public String ObtenerFecha(){
+        //Fecha Actual
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaActual = new Date();
+        String fechaFormateada = formatoFecha.format(fechaActual);
+        return fechaFormateada;
+    }
+
+    public String ObtenerHora(){
+        //Hora Actual
+        SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
+        Date horaActual = new Date();
+        String horaFormateada = formatoHora.format(horaActual);
+        return horaFormateada;
     }
 }
