@@ -16,6 +16,6 @@ public class Membresia {
 
     private double valor;
 
-    @OneToOne(mappedBy = "membresia")
-    private Usuario usuario;
+    /*@OneToOne(mappedBy = "membresia")
+    private Usuario usuario;*/
 }
