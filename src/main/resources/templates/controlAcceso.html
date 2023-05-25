@@ -17,18 +17,24 @@
     <a th:href="@{/login}"><img width="26" height="26" src="https://img.icons8.com/material-two-tone/24/open-pane.png" alt="ImgSalir"/>  Salir</a>
 </nav>
 <section class="content">
+
     <!-- Contenido -->
     <body>
+    <form action="/accesoUsuario" method="post">
     <div class="container">
         <h1>Control de Horario</h1>
         <br>
         <div class="section">
             <div class="column left">
-                <label >Fecha:Mayo 29 2023 </label>
+                <label >Fecha:
+                    <input th:value="${fecha}" required disabled>
+                </label>
 
             </div>
             <div class="column right">
-                <label >Hora: 6:00 pm </label>
+                <label >Hora:
+                <input th:value="${hora}" required disabled>
+                </label>
 
             </div>
         </div>
@@ -40,13 +46,18 @@
                 <input th:if="${usuario == null}" type="text" placeholder="Eres un Administrador" disabled>
             </label>
         </div>
+
         <div class="button-section">
-            <button class="bingreso" >Ingreso</button>
+
+
+            <button class="bingreso" type="submit" >Ingreso</button>
             <br><br>
             <button class="bsalida" >Salida</button>
+
+
         </div>
     </div>
-
+    </form>
 
     </body>
 </section>

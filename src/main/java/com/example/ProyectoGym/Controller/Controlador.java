@@ -1,12 +1,15 @@
 package com.example.ProyectoGym.Controller;
 
 import com.example.ProyectoGym.InterfaceService.*;
+import com.example.ProyectoGym.Model.ControlIngreso;
 import com.example.ProyectoGym.Model.Pago;
 import com.example.ProyectoGym.Model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import  org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import java.time.LocalDate;
 
@@ -29,6 +32,14 @@ public class Controlador {
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private double precioTotal;
+
+    //Variables Control acceso
+
+
+    private  Date fechaActual;
+    private  Date horaActual;
+    private Date horafin;
+
 
     @GetMapping("/login")
     public String login(Model model){
@@ -119,11 +130,63 @@ public class Controlador {
         return "redirect:/inicio";
     }
 
+
+    //Control de Acceso vista 1
     @GetMapping("/controlAcceso")
     public String controlIngreso(Model model){
         model.addAttribute("title", "Contro de Ingreso y Salida");
+
+        //Fecha Actual
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaActual = new Date();
+        String fechaFormateada = formatoFecha.format(fechaActual);
+        model.addAttribute("fecha", fechaFormateada);
+
+        //Hora Actual
+
+        SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
+        Date horaActual = new Date();
+        String horaFormateada = formatoHora.format(horaActual);
+        model.addAttribute("hora", horaFormateada);
+
+
         return "controlAcceso";
     }
+
+
+
+    //Captura de Fecha actual y horas de ingreso y salida del Usuario
+
+    @PostMapping("/accesoUsuario")
+    public String accesoUsuario( Model model) {
+        model.addAttribute("title", "Control de Acceso ");
+
+
+        //Fecha Actual
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaActual = new Date();
+        String fechaFormateada = formatoFecha.format(fechaActual);
+
+
+        //Hora Actual
+
+        SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
+        Date horaActual = new Date();
+        Date horafin= new Date(0);
+        String horaFormateada = formatoHora.format(horaActual);
+
+        model.addAttribute("fecha", fechaFormateada);
+        model.addAttribute("hora", horaFormateada);
+        model.addAttribute("usuario", this.userActual);
+
+        model.addAttribute("controlingreso", new ControlIngreso());
+        ControlIngreso acceso = new ControlIngreso(fechaActual,horaActual,horafin,this.userActual);
+        servCont.guardar(acceso);
+        this.userActual = null;
+        return "login";
+    }
+
+
 
     @PostMapping("/validarUsu")
     public String validarUsu(@RequestParam("cedula") String cedula, Model model){
@@ -135,6 +198,22 @@ public class Controlador {
                 return "index";
             } else if (id_rol == 112) {
                 model.addAttribute("usuario", user);
+                this.userActual= user;
+                //Fecha Actual
+                SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+                Date fechaActual = new Date();
+                String fechaFormateada = formatoFecha.format(fechaActual);
+                model.addAttribute("fecha", fechaFormateada);
+
+                //Hora Actual
+
+                SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
+                Date horaActual = new Date();
+                String horaFormateada = formatoHora.format(horaActual);
+                model.addAttribute("hora", horaFormateada);
+
+
+
                 return "controlAcceso";
             }
         } else {
