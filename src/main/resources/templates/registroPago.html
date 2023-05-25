@@ -23,24 +23,22 @@
 </nav>
 <section class="content">
     <main class="contenido">
-
-        <h4>Busqueda de Usuario</h4>
-
+        <h3>Busqueda de Usuario</h3>
         <form action="/buscarUsuario" method="post">
             <label>Buscar por Cedula
                 <input th:value="${cedula}" type="text" name="cedula" placeholder="Digite la cedula" required>
             </label>
             <button type="submit">Buscar</button>
         </form>
-                <h2>Resultado de la búsqueda</h2>
-                <div th:if="${usuario != null}">
-                    <p>Nombre: <span th:text="${usuario.nombre}"></span></p>
-                    <p>Apellido: <span th:text="${usuario.apellido}"></span></p>
-                    <p>Cedula: <span th:text="${usuario.cedula}"></span></p>
-                </div>
-                <div th:if="${usuario == null}">
-                    <p>No se encontró ningún usuario con la cédula ingresada.</p>
-                </div>
+        <h5>Resultado de la búsqueda</h5>
+        <div th:if="${usuario != null}">
+            <p>Nombre: <span th:text="${usuario.nombre}"></span></p>
+            <p>Apellido: <span th:text="${usuario.apellido}"></span></p>
+            <p>Cedula: <span th:text="${usuario.cedula}"></span></p>
+        </div>
+        <div th:if="${usuario == null}">
+            <p>No se encontró ningún usuario con la cédula ingresada.</p>
+        </div>
         <!--
         <label class="mr0">Nombres
             <input th:if="${usuario != null}" th:value="${usuario.nombre}" name="nombre" type="text" required disabled>
@@ -56,46 +54,50 @@
         <h4>Informacion de Pago</h4>
         <br>
         <br>
-        <label >Tipo Membresia:
+        <label>Tipo Membresia:
             <input th:if="${usuario != null}" th:value="${usuario.membresia.tipo}" type="text" required disabled>
             <input th:if="${usuario == null}" type="text" placeholder="Tipo de Membresia" required disabled>
         </label>
         <br>
         <form action="/calcularPrecio" method="post">
-            <label >Valor Membresia:
+            <label>Valor Membresia:
                 <input th:if="${usuario != null}" th:value="${usuario.membresia.valor}" step="any" name="valor" type="number" required>
                 <input th:if="${usuario == null}" type="number" placeholder="Valor de Membresia" required disabled>
             </label>
             <br>
-            <label >Tiempo de Suscripcion
+            <label>Tiempo de Suscripcion
                 <input th:value="${tiempo}" type="number" name="tiempo" placeholder="Digite el tiempo de pago" required max="12" min="1">
             </label>
             <button type="submit">Calcular precio</button>
         </form>
 
-        <form action="/">
-            <!--<input type="hidden" th:field="*{usuario.id_usuario}">-->
+        <form action="/guardarPago" method="post">
             <label class="mr0">Fecha de Inicio
-                <input th:value="${fechaActual}" type="date" required>
+                <input th:value="${fechaActual}" name="fechaInicio" type="date" required>
             </label>
 
             <label class="mr0">Fecha de Fin
-                <input th:value="${fechaFutura}" type="date" required>
+                <input th:value="${fechaFutura}" name="fechaFin" type="date" required>
             </label>
             <br>
             <label >Estado
                 <br>
-                <select name="estado" id="estado">
-                    <option value="true">Activo</option>
+                <select th:value="${estado}" name="estado" id="estado">
+                    <option value="true" selected>Activo</option>
                     <option value="false">Inactivo</option>
                 </select>
             </label>
-            <label for="valor_pago" class="mr0">Valor a Pagar
-                <input th:value="${valorTotal}" type="number" name="valor_pago" id="valor_pago" placeholder="Precio" required disabled>
+            <label class="mr0">Valor a Pagar
+                <input th:value="${precio}" type="number" name="precio" placeholder="Precio" required disabled>
             </label>
             <br>
             <br>
-            <button type="submit">Registrar Pago</button>
+            <div th:if="${usuario != null}">
+                <button type="submit">Registrar Pago</button>
+            </div>
+            <div th:if="${usuario == null}">
+                <h4 style="color: red;">Selecciona un Usuario</h4>
+            </div>
         </form>
     </main>
 </section>

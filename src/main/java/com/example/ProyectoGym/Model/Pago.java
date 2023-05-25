@@ -4,18 +4,31 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
 @Entity
 @Table(name = "pago")
 public class Pago {
+
+    public Pago() {
+    }
+
+    public Pago(LocalDate fechaInicio, LocalDate fechaFin, double precio, int periodoTiempo, Usuario usuario) {
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.precio = precio;
+        this.periodoTiempo = periodoTiempo;
+        this.usuario = usuario;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_pago;
 
-    private Date fechaInicio;
-    private Date fechaFin;
+    private LocalDate fechaInicio;
+    private LocalDate fechaFin;
     private double precio;
     private int periodoTiempo;
 

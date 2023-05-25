@@ -1,7 +1,7 @@
 package com.example.ProyectoGym.Controller;
 
 import com.example.ProyectoGym.InterfaceService.*;
-import com.example.ProyectoGym.Model.Rol;
+import com.example.ProyectoGym.Model.Pago;
 import com.example.ProyectoGym.Model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import  org.springframework.stereotype.Controller;
@@ -9,9 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping
@@ -68,6 +65,8 @@ public class Controlador {
     @GetMapping("/registroPago")
     public String registroPago(Model model){
         model.addAttribute("title", "Registro de Pago ");
+        model.addAttribute("usuario", this.userActual);
+        model.addAttribute("pago", new Pago());
         return "registroPago";
     }
 
@@ -77,6 +76,7 @@ public class Controlador {
         Usuario usuario = servUsu.buscarCedula(cedula);
         this.userActual = usuario;
         model.addAttribute("usuario", usuario);
+        model.addAttribute("pago", new Pago());
         return "registroPago"; // Retorna el nombre de la vista para mostrar el resultado de la búsqueda
     }
 
@@ -86,18 +86,37 @@ public class Controlador {
         double valorTotal = valor * tiempo;
         this.precioTotal = valorTotal;
         this.periodoTiempo = tiempo;
-        model.addAttribute("usuario", this.userActual);
-        model.addAttribute("valorTotal", valorTotal);
+
         // Obtener la fecha actual
         LocalDate currentDate = LocalDate.now();
         this.fechaInicio = currentDate;
+
         // Fecha Futura
         LocalDate futureDate = currentDate.plusMonths(tiempo);
         this.fechaFin = futureDate;
+        model.addAttribute("usuario", this.userActual);
+        model.addAttribute("precio", valorTotal);
         model.addAttribute("fechaActual", currentDate);
         model.addAttribute("fechaFutura", futureDate);
+        model.addAttribute("periodoTiempo", tiempo);
+        model.addAttribute("pago", new Pago());
+        //this.userActual = null;
+        return "registroPago"; //Retorna la vista con el calculo
+    }
+
+    @PostMapping("/guardarPago")
+    public String guardarPago(@RequestParam("estado") boolean estado){
+        Pago pago = new Pago(this.fechaInicio, this.fechaFin, this.precioTotal, this.periodoTiempo, this.userActual);
+        servPag.guardar(pago);
+        Usuario user = servUsu.buscarCedula(userActual.getCedula());
+        user.setEstado(estado);
+        servUsu.guardar(user);
         this.userActual = null;
-        return "registroPago"; // Retorna el nombre de la vista para mostrar el resultado de la búsqueda
+        this.fechaInicio = LocalDate.ofEpochDay(0);
+        this.fechaFin = LocalDate.ofEpochDay(0);
+        this.precioTotal = 0;
+        this.periodoTiempo = 0;
+        return "redirect:/inicio";
     }
 
     @GetMapping("/controlAcceso")
@@ -119,7 +138,7 @@ public class Controlador {
                 return "controlAcceso";
             }
         } else {
-            model.addAttribute("mensaje", "Los datos ingresados son incorrectos. Por favor, vuelva a digitarlos.");
+            model.addAttribute("mensaje", "Cedula no encontrada. Por favor, vuelva a digitarla.");
             return "login";
         }
         return cedula;
