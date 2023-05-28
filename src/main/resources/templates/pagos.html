@@ -8,7 +8,7 @@
 </head>
 <body>
 <header>
-    <h1>Usuarios Registrados</h1>
+    <h1>Pagos Registrados</h1>
 </header>
 <nav class="sidebar">
     <img width="150"  src="https://www.sopo-cundinamarca.gov.co/info/sopo_se/media/bloque29.png" alt="fondoGym">
@@ -24,24 +24,26 @@
 </nav>
 <section class="content">
     <div class="contentTab">
-        <a th:href="@{/registroUsu}" class="btnP">+ Añadir Usuario</a>
         <table class="table table-hover">
             <thead>
             <tr>
-                <th>Cedula</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
+                <th>Usuario</th>
+                <th>Meses de subscripcion</th>
+                <th>Fecha Inicio</th>
+                <th>Fecha Fin</th>
+                <th>Valor del Pago</th>
                 <th>Acciones</th>
             </tr>
             </thead>
-            <tbody class="table-group-divider">
-            <tr th:each="cliente: ${datosUsuario}" th:object="${cliente}">
-                <td th:text="*{cedula}"></td>
-                <td th:text="*{nombre}"></td>
-                <td th:text="*{apellido}"></td>
+            <tbody>
+            <tr th:each="pago: ${datosPagos}" th:object="${pago}">
+                <td th:text="*{usuario.nombre}"></td>
+                <td th:text="*{periodoTiempo}"></td>
+                <td th:text="*{fechaInicio}"></td>
+                <td th:text="*{fechaFin}"></td>
+                <td th:text="*{precio}"></td>
                 <td>
-                    <a class="btn btn-warning" th:href="@{/editarUsu/} + *{id_usuario}">Editar</a>
-                    <a class="btn btn-danger" th:href="@{/eliminarUsu/} + *{id_usuario}">Eliminar</a>
+                    <a class="btn btn-danger" th:href="@{/eliminarPago/} + *{id_pago}">Eliminar</a>
                 </td>
             </tr>
             </tbody>

@@ -8,7 +8,7 @@
 </head>
 <body>
 <header>
-    <h1>Usuarios Registrados</h1>
+    <h1>Ingresos Registrados</h1>
 </header>
 <nav class="sidebar">
     <img width="150"  src="https://www.sopo-cundinamarca.gov.co/info/sopo_se/media/bloque29.png" alt="fondoGym">
@@ -24,24 +24,25 @@
 </nav>
 <section class="content">
     <div class="contentTab">
-        <a th:href="@{/registroUsu}" class="btnP">+ Añadir Usuario</a>
-        <table class="table table-hover">
+        <table class="table table-dark table-hover">
             <thead>
             <tr>
-                <th>Cedula</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Acciones</th>
+                <th>Fecha</th>
+                <th>Hora Entrada</th>
+                <th>Hora Salida</th>
+                <th>Usuario</th>
+                <th>Accion</th>
             </tr>
             </thead>
-            <tbody class="table-group-divider">
-            <tr th:each="cliente: ${datosUsuario}" th:object="${cliente}">
-                <td th:text="*{cedula}"></td>
-                <td th:text="*{nombre}"></td>
-                <td th:text="*{apellido}"></td>
+            <tbody>
+            <tr th:each="ingreso: ${datosIngresos}" th:object="${ingreso}">
+                <td th:text="*{fecha}"></td>
+                <td th:text="*{horaEntrada}"></td>
+                <td th:if="${ingreso.horaSalida != null}" th:text="*{horaSalida}"></td>
+                <td th:if="${ingreso.horaSalida == null}">--:--:--</td>
+                <td th:text="*{usuario.nombre}"></td>
                 <td>
-                    <a class="btn btn-warning" th:href="@{/editarUsu/} + *{id_usuario}">Editar</a>
-                    <a class="btn btn-danger" th:href="@{/eliminarUsu/} + *{id_usuario}">Eliminar</a>
+                    <a class="btn btn-danger" th:href="@{/eliminarIngreso/} + *{id_registro}">Eliminar</a>
                 </td>
             </tr>
             </tbody>

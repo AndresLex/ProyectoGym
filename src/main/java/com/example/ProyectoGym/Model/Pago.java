@@ -11,18 +11,6 @@ import java.util.List;
 @Entity
 @Table(name = "pago")
 public class Pago {
-
-    public Pago() {
-    }
-
-    public Pago(LocalDate fechaInicio, LocalDate fechaFin, double precio, int periodoTiempo, Usuario usuario) {
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
-        this.precio = precio;
-        this.periodoTiempo = periodoTiempo;
-        this.usuario = usuario;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_pago;
@@ -38,4 +26,15 @@ public class Pago {
 
     /*@ManyToOne(mappedBy = "pago")
     private List<Pago> Pago;*/
+    public Pago() {
+    }
+
+    public Pago(LocalDate fechaInicio, LocalDate fechaFin, double precio, int periodoTiempo, Usuario usuario) {
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.precio = precio;
+        this.periodoTiempo = periodoTiempo;
+        this.usuario = usuario;
+    }
+
 }

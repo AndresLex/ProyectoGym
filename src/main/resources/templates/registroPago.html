@@ -9,17 +9,19 @@
 </head>
 <body>
 <header>
-    <h1>Registro Pago</h1>
+    <h1>Registro de Pago</h1>
 </header>
 <nav class="sidebar">
     <img width="150"  src="https://www.sopo-cundinamarca.gov.co/info/sopo_se/media/bloque29.png" alt="fondoGym">
 
     <a th:href="@{/inicio}"><img width="26" height="26" src="https://img.icons8.com/glyph-neue/64/user--v1.png" alt="user--v1"/>  Usuarios</a>
-    <a th:href="@{/registroUsu}"><img  src="https://img.icons8.com/ios/26/add-user-male.png" alt="add-user-male"/>  Registro Usu</a>
+    <a th:href="@{/registroUsu}"><img src="https://img.icons8.com/ios/26/add-user-male.png" alt="add-user-male"/> Registro Usu</a>
     <a th:href="@{/acciones}"><img  src="https://img.icons8.com/external-outline-lafs/26/external-actions-cloud-storage-outline-lafs.png" alt="external-actions-cloud-storage-outline-lafs"/> Acciones</a>
-    <a th:href="@{/controlAcceso}"><img  src="https://img.icons8.com/ios/25/report-card.png" alt="report-card"/>  Control Ingreso</a>
+    <a th:href="@{/controlAcceso}"><img  src="https://img.icons8.com/ios/25/report-card.png" alt="report-card"/> Control Ingreso</a>
+    <a th:href="@{/reporteAcceso}"><img src="https://img.icons8.com/ios/25/health-graph.png" alt="health-graph"/>Reporte Ingreso</a>
     <!--<a href="#">Ver Estado</a>-->
-    <a th:href="@{/registroPago}"><img  src="https://img.icons8.com/ios/26/cash-in-hand.png" alt="cash-in-hand"/>   Pago</a>
+    <a th:href="@{/registroPago}"><img src="https://img.icons8.com/ios/25/cash-in-hand.png" alt="cash-in-hand"/> Pago</a>
+    <a th:href="@{/reportePago}"><img src="https://img.icons8.com/dotty/25/online-payment-.png" alt="online-payment-"/>Reporte Pago</a>
 </nav>
 <section class="content">
     <main class="contenido">
@@ -39,17 +41,6 @@
         <div th:if="${usuario == null}">
             <p>No se encontró ningún usuario con la cédula ingresada.</p>
         </div>
-        <!--
-        <label class="mr0">Nombres
-            <input th:if="${usuario != null}" th:value="${usuario.nombre}" name="nombre" type="text" required disabled>
-            <input th:if="${usuario == null}" type="text" placeholder="Nombre del Usuario no encontrado" required disabled>
-        </label>
-        <br>
-
-        <label class="mr0">Apellidos
-            <input th:if="${usuario != null}" th:value="${usuario.apellido}" type="text" required disabled>
-            <input th:if="${usuario == null}" type="text" placeholder="Apellidos del Usuario no encontrados" required disabled>
-        </label>-->
         <br>
         <h4>Informacion de Pago</h4>
         <br>
